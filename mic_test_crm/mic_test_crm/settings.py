@@ -15,18 +15,43 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = 'django-insecure-hlf_(^+zq_eghpocstkc4khd9@5)q7+h&##^8$)ac5m$bggg^#'
+
+
+from datetime import timedelta
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',  # Mặc định yêu cầu xác thực
+    ),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),  # Token có hiệu lực trong 1 ngày
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Token refresh có hiệu lực trong 7 ngày
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,  # Dùng SECRET_KEY của Django
+    'AUTH_HEADER_TYPES': ('Bearer',),  # Sử dụng 'Bearer' token
+}
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-hlf_(^+zq_eghpocstkc4khd9@5)q7+h&##^8$)ac5m$bggg^#'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+APPEND_SLASH = False
 
 # Application definition
 
@@ -37,8 +62,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'drf_core',
+    'django_extensions',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'drf_core',
 ]
 
 MIDDLEWARE = [

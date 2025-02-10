@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,11 @@ WSGI_APPLICATION = 'mic_test_crm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',  # Chọn MySQL làm database engine
+        'NAME': 'mic_test_crm',  # Tên database bạn đã tạo trong MySQL
+        'USER': 'root',  # Tên user MySQL
+        'PASSWORD': '12345',  # Mật khẩu MySQL
+        'HOST': 'localhost',  # Địa chỉ MySQL (hoặc IP của server nếu dùng remote)
     }
 }
 

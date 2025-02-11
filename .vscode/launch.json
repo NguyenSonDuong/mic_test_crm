@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Django",
+            "type": "python",
+            "request": "launch",
+            "program": "mic_test_crm/manage.py",
+            "args": ["runserver", "--noreload"],
+            "django": true,
+            "justMyCode": true
+        }
+    ]
+}

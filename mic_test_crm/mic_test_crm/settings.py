@@ -17,6 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-hlf_(^+zq_eghpocstkc4khd9@5)q7+h&##^8$)ac5m$bggg^#'
 
+DEBUG = True  # Đảm bảo giá trị này được đặt thành True khi cần debug
 
 from datetime import timedelta
 
@@ -38,7 +39,10 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,  # Dùng SECRET_KEY của Django
     'AUTH_HEADER_TYPES': ('Bearer',),  # Sử dụng 'Bearer' token
 }
-
+AUTHENTICATION_BACKENDS = [
+    'drf_core.authentication.EmailBackend',  # Thay 'yourapp' bằng tên app của bạn
+    'django.contrib.auth.backends.ModelBackend',  # Giữ cái này để đăng nhập bằng username vẫn hoạt động
+]
 
 
 # Quick-start development settings - unsuitable for production
@@ -52,7 +56,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 APPEND_SLASH = False
-
+AUTH_USER_MODEL = "drf_core.User"
 # Application definition
 
 INSTALLED_APPS = [

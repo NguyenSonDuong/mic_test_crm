@@ -2,11 +2,14 @@ from drf_core.models import User
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
+from drf_core.drf_modules.customers.serializers import CustomersSerializer
 
 class UserSerializer(serializers.ModelSerializer):
+    info = CustomersSerializer(source="customer")
+    # employee = EmployeeSerializer()
     class Meta:
         model = User
-        fields = ['uuid', 'email', "username" , 'role']
+        fields = ['uuid', "username", "email", "info", 'role']
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
